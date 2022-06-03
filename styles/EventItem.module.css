@@ -1,0 +1,27 @@
+.eventItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #1d1d1d;
+  color: #b1b1b1;
+  gap: 1rem;
+  padding: 5px 15px;
+  margin-bottom: 1rem;
+  box-shadow: 2px 2px 8px #1d1d1d;
+  background-color: #1d1d1d;
+}
+.eventItem:hover {
+  box-shadow: 2px 2px 8px #121212;
+  background-color: #121212;
+}
+
+@media (min-width: 600px) {
+  .eventItem {
+    align-items: center;
+    flex-direction: row;
+  }
+}
+.imageContainer {
+  min-width: 170px;
+  height: auto;
+}

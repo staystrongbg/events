@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "text": "Lorem ipsum lorem lorem ipsum ipsum lorem",
+      "image": "/images/sample/event1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Mark Twen",
+      "text": "20 hiljada milja pod morem smo, i sta cemo sad?",
+      "image": "/images/sample/event2.jpg"
+    },
+    {
+      "id": "3",
+      "name": "F.Dostoyevski",
+      "text": "Ljudi smo od krvi i mesa, ne mozemo mnogo...?",
+      "image": "/images/sample/event3.jpg"
+    },
+    {
+      "id": "4",
+      "name": "C. Bukowski",
+      "text": "Bili smo mali i mislili da mozemo sve! A ispostavlja se da je Dostojevski bio u pravu",
+      "image": "/images/sample/event4.jpg"
+    }
+  ]
+}
