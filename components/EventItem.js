@@ -14,7 +14,9 @@ const EventItem = ({ event }) => {
               objectFit='cover'
               alt='event image'
               placeholder='blur'
-              blurDataURL={event.image}
+              blurDataURL={
+                event.image ? event.image : '/images/event-default.png'
+              }
               loading='lazy'
               layout='responsive'
             />
