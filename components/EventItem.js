@@ -2,7 +2,6 @@ import Image from 'next/image';
 import styles from '@/styles/EventItem.module.css';
 import Link from 'next/link';
 const EventItem = ({ event }) => {
-  console.log(event);
   return (
     <article className={styles.eventItem}>
       <Link href={`/events/${event.id}`}>

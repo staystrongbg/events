@@ -9,7 +9,6 @@ export default function Home({ dataValid }) {
   useEffect(() => {
     setEvents(dataValid);
   }, [dataValid]);
-  console.log(dataValid);
   //and here we have same object printend in browser for it is client side
   return (
     <Layout title='Home'>

@@ -48,7 +48,7 @@ const Event = ({ evt }) => {
 
           <div>
             <FlexContainer>
-              <h3>{evt.name}</h3>
+              <h1>{evt.name}</h1>
               <div className={styles.controls}>
                 <span onClick={deleteItem}>
                   <FaTrashAlt />
@@ -74,13 +74,13 @@ export async function getStaticPaths() {
   const eventsCollection = collection(db, 'events');
   const data = await getDocs(eventsCollection);
   //we get console log printed in terminal because its server side here
-  const dataValid = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
-  const paths = dataValid.map((evt) => ({
-    params: { id: evt.id },
-  }));
-
-  return { paths, fallback: true };
+  if (data) {
+    const dataValid = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    const paths = dataValid.map((evt) => ({
+      params: { id: evt.id },
+    }));
+    return { paths, fallback: false };
+  }
 }
 
 export async function getStaticProps(context) {
@@ -90,13 +90,14 @@ export async function getStaticProps(context) {
   const eventsCollection = collection(db, 'events');
   const data = await getDocs(eventsCollection);
   //we get console log printed in terminal because its server side here
-  const dataValid = data.docs
-    .map((doc) => ({ ...doc.data(), id: doc.id }))
-    .find((evt) => evt.id === context.params.id);
-  return {
-    props: {
-      evt: dataValid,
-    },
-    revalidate: 1,
-  };
+  if (data) {
+    const dataValid = data.docs
+      .map((doc) => ({ ...doc.data(), id: doc.id }))
+      .find((evt) => evt.id === context.params.id);
+    return {
+      props: {
+        evt: dataValid,
+      },
+    };
+  }
 }
