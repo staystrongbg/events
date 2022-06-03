@@ -24,7 +24,7 @@ export default function EventsPage({ dataValid }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // const res = await fetch(`${API_URL}/api/events`);
   // const events = await res.json();
   //we get console log printed in terminal because its server side here
@@ -35,7 +35,6 @@ export async function getStaticProps() {
 
   return {
     props: { dataValid },
-    revalidate: 10,
   };
 }
 //if data is cahnged its gonna refresh because it changes on each request

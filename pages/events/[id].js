@@ -21,6 +21,7 @@ export const FlexContainer = ({ style, children }) => {
   );
 };
 const Event = ({ evt }) => {
+  console.log(evt);
   const EditItem = () => {
     console.log('edit');
   };
@@ -39,7 +40,7 @@ const Event = ({ evt }) => {
               height={600}
               alt=''
               placeholder='blur'
-              blurDataURL={evt.image}
+              blurDataURL={evt.image ? evt.image : '/images/event-default.png'}
               loading='lazy'
               layout='responsive'
               objectFit='cover'
@@ -68,35 +69,12 @@ const Event = ({ evt }) => {
 
 export default Event;
 
-export async function getStaticPaths() {
-  // const res = await fetch(`${API_URL}/api/events`);
-  // const events = await res.json();
+export async function getServerSideProps(context) {
   const eventsCollection = collection(db, 'events');
   const data = await getDocs(eventsCollection);
-  //we get console log printed in terminal because its server side here
   const dataValid = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
-  const paths = dataValid.map((evt) => ({
-    params: { id: evt.id },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps(context) {
-  // const res = await fetch(`${API_URL}/api/events/${context.params.id}`);
-  // const events = await res.json();
-
-  const eventsCollection = collection(db, 'events');
-  const data = await getDocs(eventsCollection);
-  //we get console log printed in terminal because its server side here
-  const dataValid = data.docs
-    .map((doc) => ({ ...doc.data(), id: doc.id }))
-    .find((evt) => evt.id === context.params.id);
   return {
-    props: {
-      evt: dataValid,
-    },
-    revalidate: 1,
+    props: { evt: dataValid.find((ev) => ev.id === context.params.id) },
   };
 }

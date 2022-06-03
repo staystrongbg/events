@@ -28,7 +28,7 @@ export default function Home({ dataValid }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   // const res = await fetch(`${API_URL}/api/events`);
   // const events = await res.json();
   const eventsCollection = collection(db, 'events');
@@ -38,7 +38,6 @@ export async function getStaticProps() {
 
   return {
     props: { dataValid },
-    revalidate: 1,
   };
 }
 //if data is cahnged its gonna refresh because it changes on each request
