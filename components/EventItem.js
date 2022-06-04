@@ -17,7 +17,7 @@ const EventItem = ({ event }) => {
               blurDataURL={
                 event.image ? event.image : '/images/event-default.png'
               }
-              loading='lazy'
+              loading='eager'
               layout='responsive'
             />
           </div>

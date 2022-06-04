@@ -21,7 +21,6 @@ export const FlexContainer = ({ style, children }) => {
   );
 };
 const Event = ({ evt }) => {
-  console.log(evt);
   const EditItem = () => {
     console.log('edit');
   };
@@ -41,7 +40,7 @@ const Event = ({ evt }) => {
               alt=''
               placeholder='blur'
               blurDataURL={evt.image ? evt.image : '/images/event-default.png'}
-              loading='lazy'
+              loading='eager'
               layout='responsive'
               objectFit='cover'
             />
@@ -72,9 +71,11 @@ export default Event;
 export async function getServerSideProps(context) {
   const eventsCollection = collection(db, 'events');
   const data = await getDocs(eventsCollection);
-  const dataValid = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  const dataTemp = data.docs
+    .map((doc) => ({ ...doc.data(), id: doc.id }))
+    .find((ev) => ev.id === context.params.id);
 
   return {
-    props: { evt: dataValid.find((ev) => ev.id === context.params.id) },
+    props: { evt: dataTemp },
   };
 }

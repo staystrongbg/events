@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase-config';
-export default function Home({ dataValid }) {
+export default function Home({ data }) {
   const [events, setEvents] = useState([]);
   useEffect(() => {
-    setEvents(dataValid);
-  }, [dataValid]);
+    setEvents(data);
+  }, [data]);
   //and here we have same object printend in browser for it is client side
   return (
     <Layout title='Home'>
@@ -34,13 +34,12 @@ export async function getServerSideProps(context) {
   const eventsCollection = collection(db, 'events');
   const data = await getDocs(eventsCollection);
   //we get console log printed in terminal because its server side here
-  const dataValid = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
   return {
-    props: { dataValid },
+    props: { data: data.docs.map((doc) => ({ ...doc.data(), id: doc.id })) },
   };
 }
 //if data is cahnged its gonna refresh because it changes on each request
-//if it was getStaticProps - it would not autorefresh because
+//if it was getStaticProps - it would not refresh because
 //it will fetch at build time
 //if getStaticProps - add revalidate so it will know that it has to refresh
